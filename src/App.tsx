@@ -1,21 +1,25 @@
 import React, { useEffect } from "react";
-import { fetchProducts } from "./redux/reducer/productReducer";
-import { useAppDispatch } from "./redux/hooks";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
+import NavBar from "./components/NavBar"
+import Cart from "./pages/Cart";
+import ProductItem from "./pages/ProductItem";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const dispatch = useAppDispatch()
-  
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
-
+  //
   return (
-    <div className="App">
-      <Home />
-      <Products />
+    <div className="container">
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/productItem" element={<ProductItem />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
 
+      </Router>
     </div >
   );
 }
