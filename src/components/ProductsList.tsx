@@ -12,7 +12,6 @@ const ProductsList = () => {
 
     const productList = useAppSelector(state => {
         return state.productReducer.productList
-        // console.log(productList)
 
     })
     useEffect(() => {
@@ -22,8 +21,6 @@ const ProductsList = () => {
     const handleAdd=(item:Product) =>{
         dispatch(addItem(item))
     }
-    
-   
     return (
         <div className='container'>
             <Row lg={3}>

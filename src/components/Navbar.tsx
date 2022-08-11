@@ -32,14 +32,16 @@ const NavBar = () => {
                         </Form>
                     </Nav>
                     <Nav>
-                        <NavLink to="/cart" style={{ marginRight: '5rem' }} >
+                        <NavLink to="/cart" >
                             <Badge className='mx-2 rounded-circle' style={{ fontSize: '20px' }}><FaShoppingCart />
                                 <span className="position-absolute bg-dark translate-middle rounded-circle">{items.length}
                                 </span>
                             </Badge>
+                        </NavLink>
+                    </Nav>
+                    <Nav className='mx-5'>
                             <button className="btn btn-primary mx-1"> Login </button>
                             <button className="btn btn-primary mx-1"> Signup </button>
-                        </NavLink>
                     </Nav>
                 </Navbar>
             </Container>
