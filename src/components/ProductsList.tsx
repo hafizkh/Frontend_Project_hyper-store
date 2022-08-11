@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { Card, Col, Row, Button } from "react-bootstrap";
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { useAppDispatch } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchProducts } from "../redux/reducer/productReducer";
 import { addItem } from '../redux/reducer/cartReducer';
 import { Product } from '../types/product';
@@ -10,7 +8,7 @@ import { Product } from '../types/product';
 const ProductsList = () => {
     const dispatch = useAppDispatch()
 
-    const productList = useSelector((state: RootState) => {
+    const productList = useAppSelector(state => {
         // console.log(productList)
         return state.productReducer.productList
 
@@ -24,7 +22,7 @@ const ProductsList = () => {
     }
     return (
         <div className='container'>
-            <Row lg={3}>
+            <Row lg={4}>
             {
                 productList.map((item) =>
                     <div key={item.id}>
