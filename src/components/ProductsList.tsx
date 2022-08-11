@@ -4,8 +4,11 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchProducts } from "../redux/reducer/productReducer";
 import { addItem } from '../redux/reducer/cartReducer';
 import { Product } from '../types/product';
+import { useNavigate } from 'react-router-dom';
+import ProductItem from '../pages/ProductItem';
 
 const ProductsList = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
     const productList = useAppSelector(state => {
@@ -20,9 +23,13 @@ const ProductsList = () => {
     const handleAdd=(item:Product) =>{
         dispatch(addItem(item))
     }
+    const reDirect= ()=>{
+        navigate("/productItem")
+
+    }
     return (
         <div className='container'>
-            <Row lg={4}>
+            <Row lg={3}>
             {
                 productList.map((item) =>
                     <div key={item.id}>
@@ -32,7 +39,11 @@ const ProductsList = () => {
                             <Card.Body>
                                 <Card.Title>{item.title}</Card.Title>
                                 <Card.Text>{item.price} €</Card.Text>
-                                <Button className= "btn-primary" onClick={()=>handleAdd(item)}>Add to Cart</Button>
+                                <div className='d-flex'>
+                                <Button className= "btn-primary mx-4" onClick={()=>handleAdd(item)}>Add to Cart</Button>
+                                <Button className= "btn-primary mx-3" onClick={()=>reDirect()}>Details { ">>"} </Button>
+                                </div>
+                                
                             </Card.Body>
                         </Card>
                         </Col>            

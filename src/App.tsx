@@ -5,6 +5,9 @@ import NavBar from "./components/Navbar"
 import Cart from "./pages/Cart";
 import ProductItem from "./pages/ProductItem";
 import NotFound from "./pages/NotFound";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
+import Footer from "./components/Footer";
 
 function App() {
   //
@@ -15,9 +18,12 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/productItem" element={<ProductItem />} />
+          <Route path="/productItem/:id" element={<ProductItem />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
+        <Footer />
 
       </Router>
     </div >

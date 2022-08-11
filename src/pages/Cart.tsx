@@ -1,4 +1,5 @@
 import { Card, Row, Col, Button } from 'react-bootstrap'
+// import {FaShoppingCart, FaUserMinus, FaUserPlus} from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { removeItem } from '../redux/reducer/cartReducer'
 import { Product } from '../types/product';
@@ -14,6 +15,7 @@ const Cart = () => {
   const handleRemove = (e: Product) => {
     dispatch(removeItem(e))
   }
+ 
   return (
     <div className='container'>
       <h1 style={{ marginTop: '5rem' }}>Cart</h1>
@@ -27,6 +29,12 @@ const Cart = () => {
                 <Card.Body>
                   <Card.Title>{items.title}</Card.Title>
                   <Card.Text>{items.price}€</Card.Text>
+                  <div className='mt-5 d-flex justify-content-between align-items-center' style={{width:100,cursor:"pointer",background:"#ddd",color:"#111"}}>
+                    <span style={{fontSize:24}} >-</span>
+                    <span style={{fontSize:22}}>{items.price}</span>
+                    <span style={{fontSize:24}}>+</span>
+
+                    </div>
                   <Button className="btn-primary" onClick={() => handleRemove(items)}>Remove</Button>
                 </Card.Body>
               </Card>
