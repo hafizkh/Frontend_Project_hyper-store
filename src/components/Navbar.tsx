@@ -5,19 +5,19 @@ import logo from '../images/logo.jpg'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const NavBar = () => {
-    const items = useAppSelector(state => {
-        return state.cartReducer.productList
-    })
+    const items = useAppSelector((state) => 
+        state.cartReducer.productList
+    )
     return (
         <div>
+            
             <Container>
                 <Navbar bg="dark" variant="dark" fixed='top'>
                     <Navbar.Brand as={Link} to={"/home"}><img style={{ marginLeft: '5rem', width: '65px', height: '60px', borderRadius: '3rem' }}
                         src={logo} alt="Logo" /> <small style={{ fontSize: 'x-large', marginLeft: '1rem', fontFamily: 'emoji' }} >Hyper Shop</small>
                     </Navbar.Brand>
                     <Nav className="me-auto text-decoration-none text-light mx-3">
-                        <NavLink to="/home" className="text-decoration-none text-light mx-3">Home</NavLink>
-                        <NavLink to="/productItem" className="text-decoration-none text-light mx-3">Item</NavLink>
+                        <NavLink to="/home" className="text-decoration-none text-light mx-5">Home</NavLink>
                         <NavLink to="/cart" className="text-decoration-none text-light mx-3">Cart</NavLink>
                     </Nav>
                     <Nav >

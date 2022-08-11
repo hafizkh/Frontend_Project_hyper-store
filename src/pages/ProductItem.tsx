@@ -1,50 +1,47 @@
-import React,{useEffect} from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap'
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { useAppDispatch } from '../redux/hooks'
 import { addItem } from '../redux/reducer/cartReducer';
 import { Product } from '../types/product';
-import { fetchProducts } from "../redux/reducer/productReducer";
+import { useParams } from 'react-router-dom';
+import { useItem } from '../hooks/useItem';
 
 
 const ProductItem = () => {
+  const {itemId} = useParams()
+  const item = useItem(itemId);
   const dispatch = useAppDispatch()
-  const ListOfProducts = useAppSelector(state => {
-    return state.cartReducer.productList
-
-  })
-  useEffect(() => {
-    dispatch(fetchProducts())
-}, [])
+  // const ListOfProducts = useAppSelector((state) => {
+  //   return state.cartReducer.productList
+  // })
 
   const handleAdd=(item:Product) =>{
     dispatch(addItem(item))
 }
 
   return (
+  
+    <>
+    {item &&
     <div className='container'>
-      <h1 style={{ marginTop: '6rem' }}>Product Details</h1>
-      <Row lg={3}>
-      {
-        ListOfProducts.map((items) =>
-          <div key={items.id}>
-            <Col className="d-flex">
-              <Card style={{ width: '18rem' }} className="flex-fill col-md-4 mx-3 my-3">
-                <Card.Img variant="top" src={items.images[0]} />
+    <h1 style={{ marginTop: '6rem' }}>Product Details</h1>
+            <div >
+              <Card style={{display:"flex", flexDirection:'inherit', alignItems:'center', width: 'auto' }} className="col-md-4 mx-3 my-3">
+                <Card.Img variant="top" src={item.images[0]} style={{ width: '25rem' }} />
                 <Card.Body>
-                  <Card.Title>{items.title}</Card.Title>
-                  <Card.Text>{items.price}€</Card.Text>
-                  <Card.Text>{items.description}</Card.Text>
-                  <Button className="btn-primary" onClick={()=>handleAdd(items)}>Add to Cart</Button>
+                  <Card.Title>{item.title}</Card.Title>
+                  <Card.Text>{item.price}€</Card.Text>
+                  <Card.Text>{item.description}</Card.Text>
+                  <Button className="btn-primary" onClick={()=>handleAdd(item)}>Add to Cart</Button>
                 </Card.Body>
               </Card>
-            </Col>
           </div>
-        )
-      }
-      </Row>
-
-    </div >
-  )
+       </div > 
 }
+    </>
+   
+   )
+  }
+
+
 
 export default ProductItem

@@ -8,7 +8,3 @@ export interface Product {
   category: Category;
   images: string[];
 }
-export interface Checkoutproduct extends Product {
-  itemQuantity: number;
-  totalAmountWithItemQty: any;
-}
