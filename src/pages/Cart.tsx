@@ -1,36 +1,36 @@
 import { useEffect, useState } from 'react';
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import { Card, Row, Col, Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-// import {FaShoppingCart, FaUserMinus, FaUserPlus} from 'react-icons/fa'
+import { FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { addItemInCart, removeItem } from '../redux/reducer/cartReducer'
-import { cartItems,Product } from '../types/product';
-
+import { addItem, removeItem, removeItemInCart } from '../redux/reducer/cartReducer'
+import { itemsInCart } from '../types/product';
+import { idText } from 'typescript';
 
 const Cart = () => {
   const [price, setPrice] = useState(0)
   console.log(price)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const ListOfProducts = useAppSelector(state => {
-    return state.cartReducer.productList
+  const productsInCart = useAppSelector(state => state.cartReducer.cartItems)
+  // console.log(productsInCart)
 
-  })
-  console.log(ListOfProducts)
-
-  const handleRemove = (e: Product) => {
-    dispatch(removeItem(e))
+  const handleRemove = (item: itemsInCart) => {
+    dispatch(removeItem(item))
   }
-  const handleAdd = (item: Product) => {
-    dispatch(addItemInCart(item))
+  const handleAddIncart = (item: itemsInCart) => {
+    dispatch(addItem(item))
+  }
+  const handleRemoveIncart = (item: itemsInCart) => {
+    dispatch(removeItemInCart(item))
   }
   const homePage = () => {
     navigate("/home")
   }
   const totalPrice = () => {
     let price = 0
-    ListOfProducts.map((item, i) => {
-      price = item.price + price
+    productsInCart.map((item, i) => {
+      price = item.price *item.quantity + price
     })
     setPrice(price)
   }
@@ -41,45 +41,51 @@ const Cart = () => {
   return (
     <div style={{ marginBottom: '7rem' }}>
       {
-        ListOfProducts.length ?
+        productsInCart.length ?
           <div>
-            <h1 style={{ marginTop: '6rem' }}>Your Products in Cart</h1>
-            <Row lg={3}>
+            <h1 style={{ marginTop: '6rem', textAlign: 'center', fontFamily: 'system-ui' }}>Your Products in Cart</h1>
+            <div>
+                <p>Total price: {price}</p>
+              </div>
+            <Row lg={3}>   
               {
-                ListOfProducts.map((items) =>
-                  <div key={items.id}>
+              productsInCart.map((item) =>
+                  <div key={item.id}>
                     <Col className="d-flex">
                       <Card style={{ width: '10rem', }} className="flex-fill col-md-4 mx-3 my-3">
-                        <Card.Img variant="top" src={items.images[0]} />
+                        <Card.Img variant="top" src={item.images[0]} />
                         <Card.Body>
-                          <Card.Title>{items.title}</Card.Title>
-                          <Card.Text>{items.price}€</Card.Text>
-                        <Button className="btn-primary mt-2" onClick={() => handleRemove(items)}>Remove</Button>
-                      </Card.Body>
-                    </Card>
-                    <hr />
-                  </Col>
+                          <Card.Title>{item.title}</Card.Title>
+                          <Card.Text>{item.price}€</Card.Text>
+                          <Card.Text>Total Price of {item.quantity} items:<strong> {item.price*item.quantity}</strong></Card.Text>
+                          <div>
+                            <Button onClick={() => handleRemoveIncart(item)}><FaUserMinus /> </Button>
+                            <input value={item.quantity} style={{ width: '4rem' }} />
+                            <Button onClick={() => handleAddIncart(item)}><FaUserPlus /></Button>
+                          </div>
+                          <Button className="btn-primary mt-2" onClick={() => handleRemove(item)}>Remove</Button>
+                        </Card.Body>
+                      </Card>
+                      <hr />
+                    </Col>
                   </div>
                 )
-              }
-      <div>
-        <p> Total: {price}€ </p>
-      </div>
-    </Row>
-
-          </div > :
-<div className='d-flex justify-content-center align-items-center container' style={{ width: "auto", padding: 'auto', position: "relative" }}>
-  <p style={{ fontSize: '45px', marginTop: '6rem', fontFamily: 'monospace' }}>Your cart is empty</p>
-  <img src="./cart.gif" alt="Empty cart" style={{ marginTop: "6rem", padding: '10px' }} />
-  <div >
-    <Button onClick={() => homePage()}>Go Back</Button>
-  </div>
-</div>
+              }            
+            </Row>
+          </div >
+          :
+          <Container style={{
+            display: 'flex', justifyContent: 'center', width: "auto", padding: 'auto', position: "relative",
+            margin: 'inherit', marginLeft: '-14%', paddingTop: '10%', alignItems: 'center'
+          }} >
+            <p style={{ fontSize: '45px', marginTop: '6rem', fontFamily: 'monospace' }}>Your cart is empty</p>
+            <img src="./cart.gif" alt="Empty cart" style={{ marginTop: "6rem", padding: '10px' }} />
+            <Button style={{ marginTop: '22rem', marginLeft: '-26rem' }} onClick={() => homePage()}>Go Back</Button>
+          </Container>
       }
-
-
     </div >
   );
 }
+
 
 export default Cart

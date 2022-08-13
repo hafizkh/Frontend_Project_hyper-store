@@ -1,8 +1,7 @@
 import { Category } from "./category";
 
 export interface Product {
-  quantity: string | number | readonly string[] | undefined;
-  
+  // quantity: number;
   id: number;
   title: string;
   price: number;
@@ -12,6 +11,11 @@ export interface Product {
 
 }
 
-export interface cartItems extends Product {
+export interface itemsInCart extends Product {
   quantity: number;
 }
+
+// export interface Cart{
+//   cartItems:itemsInCart[],
+//   total:number
+// }

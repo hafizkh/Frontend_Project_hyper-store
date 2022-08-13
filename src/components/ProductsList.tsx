@@ -10,10 +10,8 @@ const ProductsList = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const productList = useAppSelector(state => {
-        return state.productReducer.productList
+    const listOfProducts = useAppSelector(state => state.productReducer.productList)
 
-    })
     useEffect(() => {
         dispatch(fetchProducts())
     }, [])
@@ -25,7 +23,8 @@ const ProductsList = () => {
         <div className='container'>
             <Row lg={3}>
             {
-                productList.map((item) =>
+            // listOfProducts.length > 0 &&
+                listOfProducts.map((item) =>
                     <div key={item.id}>
                         <Col className="d-flex">
                         <Card className= "flex-fill col-md-4 mx-3 my-3">

@@ -6,7 +6,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 
 const NavBar = () => {
     const items = useAppSelector((state) => 
-        state.cartReducer.productList
+        state.cartReducer.cartItems
     )
     return (
         <div>
