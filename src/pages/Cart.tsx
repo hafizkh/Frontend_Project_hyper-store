@@ -58,7 +58,7 @@ const Cart = () => {
                         <Card.Body>
                           <Card.Title>{item.title}</Card.Title>
                           <Card.Text>{item.price}€</Card.Text>
-                          <Card.Text>Price:<strong> {item.price * item.quantity}</strong></Card.Text>
+                          <Card.Text>Price:<strong> {item.price * item.quantity} €</strong></Card.Text>
                           <div>
                             <span onClick={() => handleRemoveIncart(item)}><i className="fa-solid fa-circle-minus"></i></span>
                             <span><i className="mx-2 fa-regular fa-expand-wide">{item.quantity}</i></span>
