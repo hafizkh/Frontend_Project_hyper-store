@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Card, Row, Col, Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import { FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { addItem, removeItem, removeItemInCart } from '../redux/reducer/cartReducer'
 import { itemsInCart } from '../types/product';
-import { idText } from 'typescript';
 
 const Cart = () => {
   const [price, setPrice] = useState(0)
@@ -30,7 +28,7 @@ const Cart = () => {
   const totalPrice = () => {
     let price = 0
     productsInCart.map((item, i) => {
-      price = item.price *item.quantity + price
+      price = item.price * item.quantity + price
     })
     setPrice(price)
   }
@@ -44,12 +42,15 @@ const Cart = () => {
         productsInCart.length ?
           <div>
             <h1 style={{ marginTop: '6rem', textAlign: 'center', fontFamily: 'system-ui' }}>Your Products in Cart</h1>
-            <div>
-                <p>Total price: {price}</p>
-              </div>
-            <Row lg={3}>   
+            <div className="card" style={{width: '18rem',marginLeft:'31rem',textAlign: 'center'}}>
+              <ul className="list-group list-group-light">
+                <li className="list-group-item px-3"><strong> Total Price: {price} €</strong></li>
+                {/* <li className="list-group-item px-3"><strong> Total Items in Cart: {quantity}</strong></li> */}
+              </ul>
+            </div>
+            <Row lg={3}>
               {
-              productsInCart.map((item) =>
+                productsInCart.map((item) =>
                   <div key={item.id}>
                     <Col className="d-flex">
                       <Card style={{ width: '10rem', }} className="flex-fill col-md-4 mx-3 my-3">
@@ -57,11 +58,11 @@ const Cart = () => {
                         <Card.Body>
                           <Card.Title>{item.title}</Card.Title>
                           <Card.Text>{item.price}€</Card.Text>
-                          <Card.Text>Total Price of {item.quantity} items:<strong> {item.price*item.quantity}</strong></Card.Text>
+                          <Card.Text>Price:<strong> {item.price * item.quantity}</strong></Card.Text>
                           <div>
-                            <Button onClick={() => handleRemoveIncart(item)}><FaUserMinus /> </Button>
-                            <input value={item.quantity} style={{ width: '4rem' }} />
-                            <Button onClick={() => handleAddIncart(item)}><FaUserPlus /></Button>
+                            <span onClick={() => handleRemoveIncart(item)}><i className="fa-solid fa-circle-minus"></i></span>
+                            <span><i className="mx-2 fa-regular fa-expand-wide">{item.quantity}</i></span>
+                            <span onClick={() => handleAddIncart(item)}><i className="fa-solid fa-circle-plus"></i></span>
                           </div>
                           <Button className="btn-primary mt-2" onClick={() => handleRemove(item)}>Remove</Button>
                         </Card.Body>
@@ -70,7 +71,7 @@ const Cart = () => {
                     </Col>
                   </div>
                 )
-              }            
+              }
             </Row>
           </div >
           :
