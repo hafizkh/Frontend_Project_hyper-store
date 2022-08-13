@@ -1,9 +1,9 @@
 import { Button, Card } from 'react-bootstrap'
-import { useAppDispatch } from '../redux/hooks'
+import { useAppDispatch } from '../redux/hooks/Apphooks'
 import { addItem } from '../redux/reducer/cartReducer';
 import { Product } from '../types/product';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useItem } from '../hooks/useItem';
+import { useItem } from '../redux/hooks/useItem';
 
 
 const ProductItem = () => {
