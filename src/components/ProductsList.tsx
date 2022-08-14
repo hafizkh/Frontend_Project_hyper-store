@@ -24,7 +24,6 @@ const ProductsList = () => {
         <div className='container'>
             <Row lg={3}>
             {
-            // listOfProducts.length > 0 &&
                 listOfProducts.map((item) =>
                     <div key={item.id}>
                         <Col className="d-flex">
@@ -45,7 +44,6 @@ const ProductsList = () => {
                 )
             }
             </Row>
-
         </div >
     );
 }
