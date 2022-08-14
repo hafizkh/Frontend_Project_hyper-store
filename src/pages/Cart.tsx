@@ -76,7 +76,7 @@ const Cart = () => {
             <img src="./cart.gif" style={{ width: '11rem', height: '11rem' }} alt="Fissure in Sandstone" />
             <div className="card-body">
               <h5 className="card-title" style={{ fontSize: '45px', fontFamily: 'monospace' }}>Your cart is empty</h5>
-              <Link to="/home" className="btn btn-primary mt-4" style={{ marginLeft: '176px' }} >Go Back</Link>
+              <Link to="/home" className="btn btn-primary mt-4" style={{ marginLeft: '138px' }} >Continue Shopping</Link>
             </div>
           </div>
       }
