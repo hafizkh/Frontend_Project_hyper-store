@@ -28,7 +28,7 @@ const ProductsList = () => {
                     <div key={item.id}>
                         <Col className="d-flex">
                         <Card className= "flex-fill col-md-4 mx-3 my-3">
-                            <Card.Img variant="top" src= {item.images[0]} />
+                            <Card.Img variant="top" src= {item.images[1]} />
                             <Card.Body>
                                 <Card.Title>{item.title}</Card.Title>
                                 <Card.Text>{item.price} €</Card.Text>
