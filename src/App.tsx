@@ -20,12 +20,11 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path=":itemId" element={<ProductItem />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/*" element={<NotFound />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
-
       </Router>
     </div >
   );

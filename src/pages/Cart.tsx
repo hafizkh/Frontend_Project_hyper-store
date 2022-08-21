@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card, Row, Col, Button, Container } from 'react-bootstrap'
+import { Card, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/Apphooks'
 import { addItem, removeItem, removeItemInCart } from '../redux/reducer/cartReducer'
