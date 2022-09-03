@@ -6,10 +6,11 @@ const NotFound = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='mt-4'>
-    <img src= {notFound} alt="Not Found" />
+    <div className='mt-4' style={{marginLeft:'20%'}}>
+    <img  src= {notFound} alt="Not Found" />
     <div className="card-body">
       <button type='button' 
+      style={{marginLeft:'50%'}}
       className="btn btn-primary btn-rounded" 
       onClick={()=>navigate("/home")}>Home</button>
     </div>

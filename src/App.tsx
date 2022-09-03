@@ -4,10 +4,10 @@ import Home from "./pages/Home";
 import NavBar from "./components/Navbar"
 import Cart from "./pages/Cart";
 import ProductItem from "./pages/ProductItem";
-import NotFound from "./pages/NotFound";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 function App() {
   
@@ -15,7 +15,7 @@ function App() {
     <div className="container">
       <Router>
         <NavBar />
-        <Routes>
+        <Routes>5
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path=":itemId" element={<ProductItem />} />
