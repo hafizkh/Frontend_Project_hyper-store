@@ -1,6 +1,6 @@
 # Front-end Project - Hyper Online Store
 
-## URL of the Project
+## Home Page
 
  - Deployement will be taken place soon
   
