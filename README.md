@@ -1,4 +1,4 @@
-# Front-end Project - Integrify
+# Front-end Project - Hyper Store
 
 ## URL of the Project
 
