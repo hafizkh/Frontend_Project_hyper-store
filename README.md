@@ -1,4 +1,4 @@
-# Front-end Project
+# Front-end Project - Integrify
 
 ## URL of the Project
 
