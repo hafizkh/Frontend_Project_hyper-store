@@ -1,4 +1,4 @@
-# Front-end Project - Hyper Store
+# Front-end Project - Hyper Online Store
 
 ## URL of the Project
 
@@ -6,4 +6,8 @@
   
 ## Techstack in the Project
 
-React, Typescript, Redux
+- React
+- React-Router
+- Typescript
+- Redux
+- React-Bootstrap
