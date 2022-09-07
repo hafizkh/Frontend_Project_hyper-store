@@ -2,7 +2,11 @@
 
 ## Home Page
 
- - Deployement will be taken place soon
+ The URL of the Frontend Project is:
+
+ ```
+ https://hyper-mystore.netlify.app
+ ```
   
 ## Techstack in the Project
 
