@@ -1,10 +1,11 @@
 import { Navbar, Nav, Container, Badge, Form, Button } from 'react-bootstrap'
-import { NavLink, Link } from "react-router-dom"
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import { useAppSelector } from '../redux/hooks/Apphooks'
 import logo from '../images/logo.jpg'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const NavBar = () => {
+    const navigate = useNavigate()
     const items = useAppSelector((state) =>
         state.cartReducer.cartItems
     )
@@ -54,8 +55,8 @@ const NavBar = () => {
                         </NavLink>
                     </Nav>
                     <Nav className='mx-5'>
-                        <button className="btn btn-primary mx-1"> Login </button>
-                        <button className="btn btn-primary mx-1"> Signup </button>
+                        <button className="btn btn-primary mx-1" onClick={() => navigate("/signin")}> Login </button>
+                        <button className="btn btn-primary mx-1" onClick={() => navigate("/signup")}> Signup </button>
                     </Nav>
                 </Navbar>
             </Container>
