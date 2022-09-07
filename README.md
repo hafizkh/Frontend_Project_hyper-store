@@ -4,9 +4,9 @@
 
  The URL of the Frontend Project is:
 
- ```
+
  https://hyper-mystore.netlify.app
- ```
+
   
 ## Techstack in the Project
 
