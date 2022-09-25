@@ -1,11 +1,11 @@
 import { Navbar, Nav, Container, Badge, Form, Button } from 'react-bootstrap'
 import { NavLink, Link, useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from '../redux/hooks/Apphooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks/Apphooks'
 import logo from '../images/logo.jpg'
 import { FaShoppingCart } from 'react-icons/fa'
 import { useEffect } from 'react'
-import { fetchCategory } from '../redux/reducer/categoryReducer'
-import { fetchProductsByCategory } from '../redux/reducer/productReducer'
+import { fetchCategory } from '../app/features/categorySlice'
+import { fetchProductsByCategory } from '../app/features/productSlice'
 
 const NavBar = () => {
     const navigate = useNavigate()

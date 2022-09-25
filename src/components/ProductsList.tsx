@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Card, Col, Row, Button } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from '../redux/hooks/Apphooks';
-import { fetchProducts } from "../redux/reducer/productReducer";
-import { addItem } from '../redux/reducer/cartReducer';
+import { useAppDispatch, useAppSelector } from '../app/hooks/Apphooks';
+import { fetchProducts } from "../app/features/productSlice";
+import { addItem } from '../app/features/cartSlice';
 import { Product } from '../types/product';
 import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';

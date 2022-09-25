@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../redux/hooks/Apphooks'
-import { addItem, removeItem, removeItemInCart } from '../redux/reducer/cartReducer'
+import { useAppDispatch, useAppSelector } from '../app/hooks/Apphooks'
+import { addItem, removeItem, removeItemInCart } from '../app/features/cartSlice'
 import { itemsInCart } from '../types/product';
 
 const Cart = () => {
