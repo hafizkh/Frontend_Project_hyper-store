@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
-import {
-    MDBInput,
-    MDBCol,
-    MDBRow,
-    MDBCheckbox,
-    MDBBtn,
-    MDBIcon
-} from 'mdb-react-ui-kit';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [input, setInput] = useState({
@@ -16,7 +9,7 @@ const Login = () => {
         password: "",
     })
     // console.log(input);
-    function handleVal(e:any) {
+    function handleVal(e: any) {
         // console.log(e.target.value);
         const { name, value } = e.target
         setInput(() => {
@@ -26,24 +19,32 @@ const Login = () => {
             }
         })
     }
-    const handlePrevent = async(e:any) => {
+    const handlePrevent = async (e: any) => {
         e.preventDefault()
         const { email, password } = input
         if (email === "") {
-            alert("Please enter your Email")
+            toast.warning("Please enter your Email", {
+                position: "top-center"
+            })
         }
         else if (!email.includes("@")) {
-            alert("Please enter your Valid Email Address")
+            toast.warning("Please enter your valid Email", {
+                position: "top-center"
+            })
         }
         else if (password === "") {
-            alert("Please enter your Password")
+            toast.warning("Please enter your Password", {
+                position: "top-center"
+            })
         }
         else if (password.length < 7) {
-            alert("Password must be greater than 7 Char")
+            toast.warning("Password lenghth should be more than 7 char", {
+                position: "top-center"
+            })
         }
         else {
             // alert("User Login Successfully")
-            const userData = await fetch("http://localhost:5000/api/v1/login", {
+            const userData = await fetch("http://localhost:4000/api/v1/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -56,49 +57,33 @@ const Login = () => {
             // console.log(data)
             if (data.status === 201) {
                 localStorage.setItem("usersdatatoken", data.result.token)
-                setInput({ ...input, email: "", password: ""})
+                setInput({ ...input, email: "", password: "" })
             }
         }
     }
-return (
-    <>
-        <Container style={{
+    return (
+        <div>
+            <Container style={{
                 margin: '9% auto', maxWidth: '800px', minHeight: '480px', backgroundColor: 'rgb(255 255 255)',
-                boxShadow: 'rgb(150 156 157 / 30%) 0px 5px 15px 0px', borderRadius: '36px',paddingLeft:'18%', paddingTop: '25px'
+                boxShadow: 'rgb(150 156 157 / 30%) 0px 5px 15px 0px', borderRadius: '36px', paddingLeft: '18%', paddingTop: '25px'
             }}>
-            <h1 >Login Here</h1>
-            <form className='mt-4' style={{ display: 'inline-block', width: '20rem' }}>
-                <MDBInput className='mb-4' type='email' id='email' name='email' value={input.email} onChange={handleVal} label='Email address' />
-                <MDBInput className='mb-4' type='password' id='password' name='password' value={input.password} onChange={handleVal} label='Password' />
-                <MDBRow className='mb-4'>
-                    <MDBCol className='d-flex justify-content-center'>
-                        <MDBCheckbox id='rememberMe' label='Remember me' />
-                    </MDBCol>
-                </MDBRow>
-                <MDBBtn type='submit' className='mb-4' block onClick={handlePrevent}>
-                    Sign in
-                </MDBBtn>
-                <div className='text-center'>
+                <h1 >Login Here</h1>
+                <form action="" className='mt-4' style={{ display: 'inline-block', width: '20rem' }}>
+                    <div className="mb-3">
+                        <label className="form-label">Email address</label>
+                        <input type='email' id='email' className="form-control" name='email' value={input.email} onChange={handleVal} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Password</label>
+                        <input type='password' id='password' className="form-control" name='password' value={input.password} onChange={handleVal} />
+                    </div>
+                    <button type="submit" className="btn btn-primary" onClick={handlePrevent}>Sign in</button>
                     <p>
-                        Don't have account? <Link to='/signup'>Register</Link>
+                        Don't have an account? <Link to='/signup'>Register</Link>
                     </p>
-                    <p>or sign up with:</p>
-                    <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='facebook-f' />
-                    </MDBBtn>
-                    <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='google' />
-                    </MDBBtn>
-                    <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='twitter' />
-                    </MDBBtn>
-                    <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='github' />
-                    </MDBBtn>
-                </div>
-            </form>
-        </Container>
-    </>
+                </form>
+            </Container>
+        </div>
     )
 }
 

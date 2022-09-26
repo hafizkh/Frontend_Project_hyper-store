@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
-import {
-    MDBInput,
-    MDBCol,
-    MDBRow,
-    MDBCheckbox,
-    MDBBtn,
-} from 'mdb-react-ui-kit';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [input, setInput] = useState({
@@ -16,7 +10,6 @@ const Register = () => {
         username: "",
         email: "",
         password: "",
-        // cpassword: "",
     })
     // console.log(input);
     function handleVal(e: any) {
@@ -29,36 +22,47 @@ const Register = () => {
             }
         })
     }
-
     const handlePrevent = async (e: any) => {
         e.preventDefault()
-
         const { firstname, lastname, username, email, password } = input
-
-        if (firstname === "") {
-            alert("Please enter your First Name")
+        if (firstname == "") {
+            toast.warning("Please enter your First Name", {
+                position: "top-center"
+            })
         }
         else if (lastname === "") {
-            alert("Please enter your Last Name")
+            toast.warning("Please enter your Last Name", {
+                position: "top-center"
+            })
         }
         else if (username === "") {
-            alert("Please select your suitable username")
+            toast.warning("Please enter your Username", {
+                position: "top-center"
+            })
         }
         else if (email === "") {
-            alert("Please enter your Email")
+            toast.warning("Please enter your Email", {
+                position: "top-center"
+            })
         }
         else if (!email.includes("@")) {
-            alert("Please enter your Valid Email Address")
+            toast.warning("Please enter your Valid Email Address", {
+                position: "top-center"
+            })
         }
         else if (password === "") {
-            alert("Please enter your Password")
+            toast.warning("Please enter your Password", {
+                position: "top-center"
+            })
         }
         else if (password.length < 7) {
-            alert("Password must be greater than 7 Char")
-        }    
+            toast.warning("Password lenghth should be more than 7 char", {
+                position: "top-center"
+            })
+        }
         else {
             //    alert("User Registered Successfully")
-            const userData = await fetch("http://localhost:5000/api/v1/users", {
+            const userData = await fetch("http://localhost:4000/api/v1/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -68,46 +72,48 @@ const Register = () => {
                 })
             })
             const data = await userData.json()
-            console.log(data)
+            // console.log(data)
             if (data.status === 201) {
-                alert("User has been registered")
-                setInput({ ...input, firstname: "", lastname: "", username:"",email: "", password: "" })
+                toast.success("User has been registered")
+                setInput({ ...input, firstname: "", lastname: "", username: "", email: "", password: "" })
             }
         }
     }
     return (
-        <>
+        <div>
             <Container style={{
                 margin: '9% auto', maxWidth: '800px', minHeight: '480px', backgroundColor: 'rgb(255 255 255)',
                 boxShadow: 'rgb(150 156 157 / 30%) 0px 5px 15px 0px', borderRadius: '36px', paddingLeft: '18%', paddingTop: '1px'
             }}>
                 <h1 className='mt-5'>Register Here</h1>
-                <form className='mt-4' style={{ display: 'inline-block', width: '20rem' }}>
-                    <MDBRow className='mb-4'>
-                        <MDBCol>
-                            <MDBInput id='fnam' name='firstname' label='First name' value={input.firstname} onChange={handleVal} />
-                        </MDBCol>
-                        <MDBCol>
-                            <MDBInput id='lname' name='lastname' label='Last name' value={input.lastname} onChange={handleVal} />
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBInput className='mb-4' type='username' id='email' name='username' label='Username' value={input.username} onChange={handleVal} />
-                    <MDBInput className='mb-4' type='email' id='email' name='email' label='Email address' value={input.email} onChange={handleVal} />
-                    <MDBInput className='mb-4' type='password' id='password' name='password' label='Password' value={input.password} onChange={handleVal} />
-                    <MDBRow className='mb-4'>
-                        <MDBCol className='d-flex'>
-                            <MDBCheckbox id='rememberMe' label='Remember me' />
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBBtn type='submit' className='mb-4' block onClick={handlePrevent}>
-                        Sign up
-                    </MDBBtn>
+                <form action="" className='mt-4' style={{ display: 'inline-block', width: '20rem' }}>
+                    <div className="mb-3">
+                        <label className="form-label">First Name</label>
+                        <input type="text" id='fnam' className="form-control" name='firstname' value={input.firstname} onChange={handleVal} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Last Name</label>
+                        <input type="text" id='lname' className="form-control" name='lastname' value={input.lastname} onChange={handleVal} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Username</label>
+                        <input type='username' id='email' className="form-control" name='username' value={input.username} onChange={handleVal} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Email address</label>
+                        <input type='email' id='email' className="form-control" name='email' value={input.email} onChange={handleVal} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Password</label>
+                        <input type='password' id='password' className="form-control" name='password' value={input.password} onChange={handleVal} />
+                    </div>
+                    <button type="submit" className="btn btn-primary" onClick={handlePrevent}>Sign up</button>
                     <p>
                         Already have an account? <Link to='/signin'>Login</Link>
                     </p>
                 </form>
             </Container>
-        </>
+        </div>
     )
 }
 
