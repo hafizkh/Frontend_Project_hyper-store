@@ -25,7 +25,7 @@ const Register = () => {
     const handlePrevent = async (e: any) => {
         e.preventDefault()
         const { firstname, lastname, username, email, password } = input
-        if (firstname == "") {
+        if (firstname === "") {
             toast.warning("Please enter your First Name", {
                 position: "top-center"
             })
